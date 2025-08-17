@@ -5,6 +5,8 @@ const morgan = require('morgan')
 
 const cors = require('cors')
 
+const path = require('path');
+
 app.use(cors())
 
 app.use(express.json())
@@ -32,6 +34,10 @@ let persons = [
       "id": "4"
     }
 ]
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'dist', 'index.html'));
+});
 
 app.use(express.static('dist'))
 
