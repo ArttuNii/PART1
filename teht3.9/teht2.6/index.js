@@ -35,10 +35,6 @@ let persons = [
     }
 ]
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'dist', 'index.html'));
-});
-
 app.use(express.static('dist'))
 
 app.get('/api/persons', (request, response) => {
@@ -97,6 +93,10 @@ app.post('/api/persons', (request, response) => {
   persons = persons.concat(person)
   response.json(person)
 })
+
+app.get('*', (request, response) => {
+  response.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
