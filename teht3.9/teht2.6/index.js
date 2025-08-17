@@ -5,8 +5,6 @@ const morgan = require('morgan')
 
 const cors = require('cors')
 
-const path = require('path');
-
 app.use(cors())
 
 app.use(express.json())
@@ -35,7 +33,7 @@ let persons = [
     }
 ]
 
-app.use(express.static(path.join(__dirname, 'src', 'dist')));
+app.use(express.static('dist'))
 
 app.get('/api/persons', (request, response) => {
   response.json(persons)
