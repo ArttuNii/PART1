@@ -35,8 +35,6 @@ let persons = [
     }
 ]
 
-app.use(express.static(path.join(__dirname, 'src', 'dist')));
-
 app.get('/api/persons', (request, response) => {
   response.json(persons)
 })
@@ -94,8 +92,11 @@ app.post('/api/persons', (request, response) => {
   response.json(person)
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'dist', 'index.html'));
+const distPath = path.join(__dirname, 'src', 'dist');
+app.use(express.static(distPath));
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
