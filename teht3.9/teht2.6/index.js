@@ -35,7 +35,7 @@ let persons = [
     }
 ]
 
-app.use(express.static('dist'))
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/api/persons', (request, response) => {
   response.json(persons)
